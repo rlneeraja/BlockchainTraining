@@ -3,16 +3,17 @@ import "./BaseAccount.sol";
 
 contract CurrentAccount {
 
-  balance = 1000;
+  
   
   function CurrentAccount() {
     // constructor
+    balance = 1000;
   }
 
-  function withdraw(uint amt) public {
+  function withdraw(uint amtt) public {
     balance = balance-amt;
   }
-  function deposit(unit amt) public {
+  function deposit(uint amt) public {
     balance = balance+amt;
   }
 

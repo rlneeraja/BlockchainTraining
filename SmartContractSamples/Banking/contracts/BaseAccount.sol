@@ -4,17 +4,21 @@ contract BaseAccount {
   function BaseAccount() {
     // constructor
   }
-  unit public balance ;
+  uint public balance ;
 
-  function withdraw() public;
-  function deposit() public;
+  function withdraw(uint amt) public {
+    balance = balance-amt;
+  }
+  function deposit(uint amt) public {
+    balance = balance+amt;
+  }
 
-  function audit() returns string {
+  function audit() returns (string) {
     return "audit done";
   }
 
-  function getBalance(){
-    return 
+  function getBalance() returns (uint) {
+    return balance;
   }
 
 }
