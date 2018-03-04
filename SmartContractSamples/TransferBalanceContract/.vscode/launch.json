@@ -1,0 +1,17 @@
+{
+
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "run tests",
+            "type": "node",
+            "request": "launch",
+            "program": "/Users/ashokperiaswamy/node_modules/truffle/build/cli.bundled.js",
+            "args": ["test"],
+            "cwd": "${workspaceRoot}",
+            "outFiles": [
+                "${workspaceRoot}/test/**/*"
+            ],
+        }
+    ]
+    }

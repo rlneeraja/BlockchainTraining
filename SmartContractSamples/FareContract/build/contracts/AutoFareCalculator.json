@@ -1,0 +1,349 @@
+{
+  "contractName": "AutoFareCalculator",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "string"
+        },
+        {
+          "name": "destination",
+          "type": "string"
+        }
+      ],
+      "name": "calculateFare",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "location",
+          "type": "string"
+        }
+      ],
+      "name": "addLocation",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    }
+  ],
+  "bytecode": "0x6060604052341561000f57600080fd5b61031e8061001e6000396000f30060606040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680633f32af65146100515780635fddb08814610105575b600080fd5b341561005c57600080fd5b6100ef600480803590602001908201803590602001908080601f0160208091040260200160405190810160405280939291908181526020018383808284378201915050505050509190803590602001908201803590602001908080601f01602080910402602001604051908101604052809392919081815260200183838082843782019150505050505091905050610162565b6040518082815260200191505060405180910390f35b341561011057600080fd5b610160600480803590602001908201803590602001908080601f0160208091040260200160405190810160405280939291908181526020018383808284378201915050505050509190505061016e565b005b60006014905092915050565b6000805480600101828161018291906101ad565b9160005260206000209001600083909190915090805190602001906101a89291906101d9565b505050565b8154818355818115116101d4578183600052602060002091820191016101d39190610259565b5b505050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061021a57805160ff1916838001178555610248565b82800160010185558215610248579182015b8281111561024757825182559160200191906001019061022c565b5b5090506102559190610285565b5090565b61028291905b8082111561027e576000818161027591906102aa565b5060010161025f565b5090565b90565b6102a791905b808211156102a357600081600090555060010161028b565b5090565b90565b50805460018160011615610100020316600290046000825580601f106102d057506102ef565b601f0160209004906000526020600020908101906102ee9190610285565b5b505600a165627a7a723058207898c6aa265fdf13cab0861d09b8d8866017fd41e64b85bdb41272233cebd1530029",
+  "deployedBytecode": "0x60606040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680633f32af65146100515780635fddb08814610105575b600080fd5b341561005c57600080fd5b6100ef600480803590602001908201803590602001908080601f0160208091040260200160405190810160405280939291908181526020018383808284378201915050505050509190803590602001908201803590602001908080601f01602080910402602001604051908101604052809392919081815260200183838082843782019150505050505091905050610162565b6040518082815260200191505060405180910390f35b341561011057600080fd5b610160600480803590602001908201803590602001908080601f0160208091040260200160405190810160405280939291908181526020018383808284378201915050505050509190505061016e565b005b60006014905092915050565b6000805480600101828161018291906101ad565b9160005260206000209001600083909190915090805190602001906101a89291906101d9565b505050565b8154818355818115116101d4578183600052602060002091820191016101d39190610259565b5b505050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061021a57805160ff1916838001178555610248565b82800160010185558215610248579182015b8281111561024757825182559160200191906001019061022c565b5b5090506102559190610285565b5090565b61028291905b8082111561027e576000818161027591906102aa565b5060010161025f565b5090565b90565b6102a791905b808211156102a357600081600090555060010161028b565b5090565b90565b50805460018160011615610100020316600290046000825580601f106102d057506102ef565b601f0160209004906000526020600020908101906102ee9190610285565b5b505600a165627a7a723058207898c6aa265fdf13cab0861d09b8d8866017fd41e64b85bdb41272233cebd1530029",
+  "sourceMap": "60:208:0:-;;;114:54;;;;;;;;60:208;;;;;;",
+  "deployedSourceMap": "60:208:0:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;170:95;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;218:73:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;170:95:0;240:7;260:2;253:9;;170:95;;;;:::o;218:73:1:-;262:9;:24;;;;;;;;;;;:::i;:::-;;;;;;;;;;277:8;262:24;;;;;;;;;;;;;;;;;:::i;:::-;;;218:73;:::o;60:208:0:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;:::o",
+  "source": "pragma solidity ^0.4.4;\nimport \"./BaseFareCalculator.sol\";\n\ncontract AutoFareCalculator is BaseFareCalculator {\n  function AutoFareCalculator() {\n    // constructor\n  }\n\nfunction calculateFare ( string source, string destination ) returns (uint256) {\n  return 20;\n}\n\n}\n",
+  "sourcePath": "/Users/ashokperiaswamy/Documents/Quality Thoughts/SmartContractSamples/FareContract/contracts/AutoFareCalculator.sol",
+  "ast": {
+    "attributes": {
+      "absolutePath": "/Users/ashokperiaswamy/Documents/Quality Thoughts/SmartContractSamples/FareContract/contracts/AutoFareCalculator.sol",
+      "exportedSymbols": {
+        "AutoFareCalculator": [
+          21
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.4",
+            ".4"
+          ]
+        },
+        "id": 1,
+        "name": "PragmaDirective",
+        "src": "0:23:0"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 53,
+          "absolutePath": "/Users/ashokperiaswamy/Documents/Quality Thoughts/SmartContractSamples/FareContract/contracts/BaseFareCalculator.sol",
+          "file": "./BaseFareCalculator.sol",
+          "scope": 22,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 2,
+        "name": "ImportDirective",
+        "src": "24:34:0"
+      },
+      {
+        "attributes": {
+          "contractDependencies": [
+            52
+          ],
+          "contractKind": "contract",
+          "documentation": null,
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            21,
+            52
+          ],
+          "name": "AutoFareCalculator",
+          "scope": 22
+        },
+        "children": [
+          {
+            "attributes": {
+              "arguments": [
+                null
+              ]
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "BaseFareCalculator",
+                  "referencedDeclaration": 52,
+                  "type": "contract BaseFareCalculator"
+                },
+                "id": 3,
+                "name": "UserDefinedTypeName",
+                "src": "91:18:0"
+              }
+            ],
+            "id": 4,
+            "name": "InheritanceSpecifier",
+            "src": "91:18:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "implemented": true,
+              "isConstructor": true,
+              "modifiers": [
+                null
+              ],
+              "name": "AutoFareCalculator",
+              "payable": false,
+              "scope": 21,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 5,
+                "name": "ParameterList",
+                "src": "141:2:0"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 6,
+                "name": "ParameterList",
+                "src": "144:0:0"
+              },
+              {
+                "attributes": {
+                  "statements": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 7,
+                "name": "Block",
+                "src": "144:24:0"
+              }
+            ],
+            "id": 8,
+            "name": "FunctionDefinition",
+            "src": "114:54:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "implemented": true,
+              "isConstructor": false,
+              "modifiers": [
+                null
+              ],
+              "name": "calculateFare",
+              "payable": false,
+              "scope": 21,
+              "stateMutability": "nonpayable",
+              "superFunction": 39,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "source",
+                      "scope": 20,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "string memory",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string storage pointer"
+                        },
+                        "id": 9,
+                        "name": "ElementaryTypeName",
+                        "src": "195:6:0"
+                      }
+                    ],
+                    "id": 10,
+                    "name": "VariableDeclaration",
+                    "src": "195:13:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "destination",
+                      "scope": 20,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "string memory",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string storage pointer"
+                        },
+                        "id": 11,
+                        "name": "ElementaryTypeName",
+                        "src": "210:6:0"
+                      }
+                    ],
+                    "id": 12,
+                    "name": "VariableDeclaration",
+                    "src": "210:18:0"
+                  }
+                ],
+                "id": 13,
+                "name": "ParameterList",
+                "src": "193:37:0"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "",
+                      "scope": 20,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint256",
+                          "type": "uint256"
+                        },
+                        "id": 14,
+                        "name": "ElementaryTypeName",
+                        "src": "240:7:0"
+                      }
+                    ],
+                    "id": 15,
+                    "name": "VariableDeclaration",
+                    "src": "240:7:0"
+                  }
+                ],
+                "id": 16,
+                "name": "ParameterList",
+                "src": "239:9:0"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "functionReturnParameters": 16
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "hexvalue": "3230",
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "subdenomination": null,
+                          "token": "number",
+                          "type": "int_const 20",
+                          "value": "20"
+                        },
+                        "id": 17,
+                        "name": "Literal",
+                        "src": "260:2:0"
+                      }
+                    ],
+                    "id": 18,
+                    "name": "Return",
+                    "src": "253:9:0"
+                  }
+                ],
+                "id": 19,
+                "name": "Block",
+                "src": "249:16:0"
+              }
+            ],
+            "id": 20,
+            "name": "FunctionDefinition",
+            "src": "170:95:0"
+          }
+        ],
+        "id": 21,
+        "name": "ContractDefinition",
+        "src": "60:208:0"
+      }
+    ],
+    "id": 22,
+    "name": "SourceUnit",
+    "src": "0:269:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.18+commit.9cf6e910.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "1.0.1",
+  "updatedAt": "2018-03-04T03:51:36.785Z"
+}
