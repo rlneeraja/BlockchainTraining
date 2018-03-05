@@ -1,0 +1,2759 @@
+{
+  "contractName": "BaseAccount",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "number",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        },
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "accounts",
+      "outputs": [
+        {
+          "name": "balance",
+          "type": "uint256"
+        },
+        {
+          "name": "accountNo",
+          "type": "uint256"
+        },
+        {
+          "name": "auditStatus",
+          "type": "uint8"
+        },
+        {
+          "name": "actType",
+          "type": "uint8"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "p",
+          "type": "address"
+        }
+      ],
+      "name": "createSavingsAccount",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "name": "actType",
+          "type": "uint8"
+        }
+      ],
+      "name": "getAccountInfo",
+      "outputs": [
+        {
+          "components": [
+            {
+              "name": "balance",
+              "type": "uint256"
+            },
+            {
+              "name": "accountNo",
+              "type": "uint256"
+            },
+            {
+              "name": "auditStatus",
+              "type": "uint8"
+            },
+            {
+              "name": "actType",
+              "type": "uint8"
+            }
+          ],
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "p",
+          "type": "address"
+        }
+      ],
+      "name": "createCurrentAccount",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.4.4;\n\ncontract BaseAccount {\n\n  uint public number = 0;\n  function BaseAccount() {\n    // constructor\n  }\n\nenum AcctTypeChoices { current, saving }\nenum AuditStatusChoices { goodrecords, warningrecords, badrecords }\n\n\n struct Account {\n  uint  balance ;\n  uint accountNo ;\n  AuditStatusChoices auditStatus;\n  AcctTypeChoices actType ;\n }\n\nmapping(address => Account[]) public accounts;\n\n function withdraw(address user, AcctTypeChoices actTpe, uint amt) internal;\n   \n\n  function deposit(address user, AcctTypeChoices actType, uint amt) internal {\n    Account[]  storage acc = accounts[user];\n    for (uint i = 0; i < acc.length; i++) {\n       if ( actType == (acc[i].actType)) {\n        acc[i].balance = acc[i].balance + amt;      \n        accounts[user].push(acc[i]);\n      }\n  }\n  }\n \n  function getAccountInfo( address user, AcctTypeChoices actType) returns (Account) {\n\n      Account[]  storage acc = accounts[user];\n      for (uint i = 0; i < acc.length; i++) {\n       if ( actType == acc[i].actType ) {\n            return acc[i];\n        }\n    }\n    \n  }\n\n  function createSavingsAccount(address p) public {\n    number+=1;\n    accounts[p].push(Account(1000, number, AuditStatusChoices.goodrecords, AcctTypeChoices.saving));\n  }\n\n  function createCurrentAccount(address p) public {\n    number+=1;\n    accounts[p].push(Account(0, number, AuditStatusChoices.goodrecords, AcctTypeChoices.current));\n  }\n\n}\n",
+  "sourcePath": "/Users/ashokperiaswamy/Desktop/BlockchainTraining/SmartContractSamples/Banking/contracts/BaseAccount.sol",
+  "ast": {
+    "attributes": {
+      "absolutePath": "/Users/ashokperiaswamy/Desktop/BlockchainTraining/SmartContractSamples/Banking/contracts/BaseAccount.sol",
+      "exportedSymbols": {
+        "BaseAccount": [
+          191
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.4",
+            ".4"
+          ]
+        },
+        "id": 1,
+        "name": "PragmaDirective",
+        "src": "0:23:0"
+      },
+      {
+        "attributes": {
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "contract",
+          "documentation": null,
+          "fullyImplemented": false,
+          "linearizedBaseContracts": [
+            191
+          ],
+          "name": "BaseAccount",
+          "scope": 192
+        },
+        "children": [
+          {
+            "attributes": {
+              "constant": false,
+              "name": "number",
+              "scope": 191,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "uint256",
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "uint",
+                  "type": "uint256"
+                },
+                "id": 2,
+                "name": "ElementaryTypeName",
+                "src": "51:4:0"
+              },
+              {
+                "attributes": {
+                  "argumentTypes": null,
+                  "hexvalue": "30",
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": true,
+                  "lValueRequested": false,
+                  "subdenomination": null,
+                  "token": "number",
+                  "type": "int_const 0",
+                  "value": "0"
+                },
+                "id": 3,
+                "name": "Literal",
+                "src": "72:1:0"
+              }
+            ],
+            "id": 4,
+            "name": "VariableDeclaration",
+            "src": "51:22:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "implemented": true,
+              "isConstructor": true,
+              "modifiers": [
+                null
+              ],
+              "name": "BaseAccount",
+              "payable": false,
+              "scope": 191,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 5,
+                "name": "ParameterList",
+                "src": "97:2:0"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 6,
+                "name": "ParameterList",
+                "src": "100:0:0"
+              },
+              {
+                "attributes": {
+                  "statements": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 7,
+                "name": "Block",
+                "src": "100:24:0"
+              }
+            ],
+            "id": 8,
+            "name": "FunctionDefinition",
+            "src": "77:47:0"
+          },
+          {
+            "attributes": {
+              "canonicalName": "BaseAccount.AcctTypeChoices",
+              "name": "AcctTypeChoices"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "current"
+                },
+                "id": 9,
+                "name": "EnumValue",
+                "src": "149:7:0"
+              },
+              {
+                "attributes": {
+                  "name": "saving"
+                },
+                "id": 10,
+                "name": "EnumValue",
+                "src": "158:6:0"
+              }
+            ],
+            "id": 11,
+            "name": "EnumDefinition",
+            "src": "126:40:0"
+          },
+          {
+            "attributes": {
+              "canonicalName": "BaseAccount.AuditStatusChoices",
+              "name": "AuditStatusChoices"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "goodrecords"
+                },
+                "id": 12,
+                "name": "EnumValue",
+                "src": "193:11:0"
+              },
+              {
+                "attributes": {
+                  "name": "warningrecords"
+                },
+                "id": 13,
+                "name": "EnumValue",
+                "src": "206:14:0"
+              },
+              {
+                "attributes": {
+                  "name": "badrecords"
+                },
+                "id": 14,
+                "name": "EnumValue",
+                "src": "222:10:0"
+              }
+            ],
+            "id": 15,
+            "name": "EnumDefinition",
+            "src": "167:67:0"
+          },
+          {
+            "attributes": {
+              "canonicalName": "BaseAccount.Account",
+              "name": "Account",
+              "scope": 191,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "balance",
+                  "scope": 24,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint",
+                      "type": "uint256"
+                    },
+                    "id": 16,
+                    "name": "ElementaryTypeName",
+                    "src": "257:4:0"
+                  }
+                ],
+                "id": 17,
+                "name": "VariableDeclaration",
+                "src": "257:13:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "accountNo",
+                  "scope": 24,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint",
+                      "type": "uint256"
+                    },
+                    "id": 18,
+                    "name": "ElementaryTypeName",
+                    "src": "275:4:0"
+                  }
+                ],
+                "id": 19,
+                "name": "VariableDeclaration",
+                "src": "275:14:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "auditStatus",
+                  "scope": 24,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "enum BaseAccount.AuditStatusChoices",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "contractScope": null,
+                      "name": "AuditStatusChoices",
+                      "referencedDeclaration": 15,
+                      "type": "enum BaseAccount.AuditStatusChoices"
+                    },
+                    "id": 20,
+                    "name": "UserDefinedTypeName",
+                    "src": "294:18:0"
+                  }
+                ],
+                "id": 21,
+                "name": "VariableDeclaration",
+                "src": "294:30:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "actType",
+                  "scope": 24,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "enum BaseAccount.AcctTypeChoices",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "contractScope": null,
+                      "name": "AcctTypeChoices",
+                      "referencedDeclaration": 11,
+                      "type": "enum BaseAccount.AcctTypeChoices"
+                    },
+                    "id": 22,
+                    "name": "UserDefinedTypeName",
+                    "src": "328:15:0"
+                  }
+                ],
+                "id": 23,
+                "name": "VariableDeclaration",
+                "src": "328:23:0"
+              }
+            ],
+            "id": 24,
+            "name": "StructDefinition",
+            "src": "238:118:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "name": "accounts",
+              "scope": 191,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "mapping(address => struct BaseAccount.Account storage ref[] storage ref)",
+              "value": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "type": "mapping(address => struct BaseAccount.Account storage ref[] storage ref)"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "address",
+                      "type": "address"
+                    },
+                    "id": 25,
+                    "name": "ElementaryTypeName",
+                    "src": "366:7:0"
+                  },
+                  {
+                    "attributes": {
+                      "length": null,
+                      "type": "struct BaseAccount.Account storage ref[] storage pointer"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "contractScope": null,
+                          "name": "Account",
+                          "referencedDeclaration": 24,
+                          "type": "struct BaseAccount.Account storage pointer"
+                        },
+                        "id": 26,
+                        "name": "UserDefinedTypeName",
+                        "src": "377:7:0"
+                      }
+                    ],
+                    "id": 27,
+                    "name": "ArrayTypeName",
+                    "src": "377:9:0"
+                  }
+                ],
+                "id": 28,
+                "name": "Mapping",
+                "src": "358:29:0"
+              }
+            ],
+            "id": 29,
+            "name": "VariableDeclaration",
+            "src": "358:45:0"
+          },
+          {
+            "attributes": {
+              "body": null,
+              "constant": false,
+              "implemented": false,
+              "isConstructor": false,
+              "modifiers": [
+                null
+              ],
+              "name": "withdraw",
+              "payable": false,
+              "scope": 191,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "user",
+                      "scope": 38,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "type": "address"
+                        },
+                        "id": 30,
+                        "name": "ElementaryTypeName",
+                        "src": "425:7:0"
+                      }
+                    ],
+                    "id": 31,
+                    "name": "VariableDeclaration",
+                    "src": "425:12:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "actTpe",
+                      "scope": 38,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "enum BaseAccount.AcctTypeChoices",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "contractScope": null,
+                          "name": "AcctTypeChoices",
+                          "referencedDeclaration": 11,
+                          "type": "enum BaseAccount.AcctTypeChoices"
+                        },
+                        "id": 32,
+                        "name": "UserDefinedTypeName",
+                        "src": "439:15:0"
+                      }
+                    ],
+                    "id": 33,
+                    "name": "VariableDeclaration",
+                    "src": "439:22:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "amt",
+                      "scope": 38,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 34,
+                        "name": "ElementaryTypeName",
+                        "src": "463:4:0"
+                      }
+                    ],
+                    "id": 35,
+                    "name": "VariableDeclaration",
+                    "src": "463:8:0"
+                  }
+                ],
+                "id": 36,
+                "name": "ParameterList",
+                "src": "424:48:0"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 37,
+                "name": "ParameterList",
+                "src": "481:0:0"
+              }
+            ],
+            "id": 38,
+            "name": "FunctionDefinition",
+            "src": "407:75:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "implemented": true,
+              "isConstructor": false,
+              "modifiers": [
+                null
+              ],
+              "name": "deposit",
+              "payable": false,
+              "scope": 191,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "user",
+                      "scope": 99,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "type": "address"
+                        },
+                        "id": 39,
+                        "name": "ElementaryTypeName",
+                        "src": "507:7:0"
+                      }
+                    ],
+                    "id": 40,
+                    "name": "VariableDeclaration",
+                    "src": "507:12:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "actType",
+                      "scope": 99,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "enum BaseAccount.AcctTypeChoices",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "contractScope": null,
+                          "name": "AcctTypeChoices",
+                          "referencedDeclaration": 11,
+                          "type": "enum BaseAccount.AcctTypeChoices"
+                        },
+                        "id": 41,
+                        "name": "UserDefinedTypeName",
+                        "src": "521:15:0"
+                      }
+                    ],
+                    "id": 42,
+                    "name": "VariableDeclaration",
+                    "src": "521:23:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "amt",
+                      "scope": 99,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 43,
+                        "name": "ElementaryTypeName",
+                        "src": "546:4:0"
+                      }
+                    ],
+                    "id": 44,
+                    "name": "VariableDeclaration",
+                    "src": "546:8:0"
+                  }
+                ],
+                "id": 45,
+                "name": "ParameterList",
+                "src": "506:49:0"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 46,
+                "name": "ParameterList",
+                "src": "565:0:0"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "assignments": [
+                        50
+                      ]
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "constant": false,
+                          "name": "acc",
+                          "scope": 99,
+                          "stateVariable": false,
+                          "storageLocation": "storage",
+                          "type": "struct BaseAccount.Account storage ref[] storage pointer",
+                          "value": null,
+                          "visibility": "internal"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "length": null,
+                              "type": "struct BaseAccount.Account storage ref[] storage pointer"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "contractScope": null,
+                                  "name": "Account",
+                                  "referencedDeclaration": 24,
+                                  "type": "struct BaseAccount.Account storage pointer"
+                                },
+                                "id": 48,
+                                "name": "UserDefinedTypeName",
+                                "src": "571:7:0"
+                              }
+                            ],
+                            "id": 49,
+                            "name": "ArrayTypeName",
+                            "src": "571:9:0"
+                          }
+                        ],
+                        "id": 50,
+                        "name": "VariableDeclaration",
+                        "src": "571:22:0"
+                      },
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "type": "struct BaseAccount.Account storage ref[] storage ref"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 29,
+                              "type": "mapping(address => struct BaseAccount.Account storage ref[] storage ref)",
+                              "value": "accounts"
+                            },
+                            "id": 51,
+                            "name": "Identifier",
+                            "src": "596:8:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 40,
+                              "type": "address",
+                              "value": "user"
+                            },
+                            "id": 52,
+                            "name": "Identifier",
+                            "src": "605:4:0"
+                          }
+                        ],
+                        "id": 53,
+                        "name": "IndexAccess",
+                        "src": "596:14:0"
+                      }
+                    ],
+                    "id": 54,
+                    "name": "VariableDeclarationStatement",
+                    "src": "571:39:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "assignments": [
+                            56
+                          ]
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "constant": false,
+                              "name": "i",
+                              "scope": 99,
+                              "stateVariable": false,
+                              "storageLocation": "default",
+                              "type": "uint256",
+                              "value": null,
+                              "visibility": "internal"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "name": "uint",
+                                  "type": "uint256"
+                                },
+                                "id": 55,
+                                "name": "ElementaryTypeName",
+                                "src": "621:4:0"
+                              }
+                            ],
+                            "id": 56,
+                            "name": "VariableDeclaration",
+                            "src": "621:6:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "hexvalue": "30",
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "subdenomination": null,
+                              "token": "number",
+                              "type": "int_const 0",
+                              "value": "0"
+                            },
+                            "id": 57,
+                            "name": "Literal",
+                            "src": "630:1:0"
+                          }
+                        ],
+                        "id": 58,
+                        "name": "VariableDeclarationStatement",
+                        "src": "621:10:0"
+                      },
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "commonType": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          },
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "<",
+                          "type": "bool"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 56,
+                              "type": "uint256",
+                              "value": "i"
+                            },
+                            "id": 59,
+                            "name": "Identifier",
+                            "src": "633:1:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "length",
+                              "referencedDeclaration": null,
+                              "type": "uint256"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 50,
+                                  "type": "struct BaseAccount.Account storage ref[] storage pointer",
+                                  "value": "acc"
+                                },
+                                "id": 60,
+                                "name": "Identifier",
+                                "src": "637:3:0"
+                              }
+                            ],
+                            "id": 61,
+                            "name": "MemberAccess",
+                            "src": "637:10:0"
+                          }
+                        ],
+                        "id": 62,
+                        "name": "BinaryOperation",
+                        "src": "633:14:0"
+                      },
+                      {
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "operator": "++",
+                              "prefix": false,
+                              "type": "uint256"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 56,
+                                  "type": "uint256",
+                                  "value": "i"
+                                },
+                                "id": 63,
+                                "name": "Identifier",
+                                "src": "649:1:0"
+                              }
+                            ],
+                            "id": 64,
+                            "name": "UnaryOperation",
+                            "src": "649:3:0"
+                          }
+                        ],
+                        "id": 65,
+                        "name": "ExpressionStatement",
+                        "src": "649:3:0"
+                      },
+                      {
+                        "children": [
+                          {
+                            "attributes": {
+                              "falseBody": null
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "commonType": {
+                                    "typeIdentifier": "t_enum$_AcctTypeChoices_$11",
+                                    "typeString": "enum BaseAccount.AcctTypeChoices"
+                                  },
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "operator": "==",
+                                  "type": "bool"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 42,
+                                      "type": "enum BaseAccount.AcctTypeChoices",
+                                      "value": "actType"
+                                    },
+                                    "id": 66,
+                                    "name": "Identifier",
+                                    "src": "668:7:0"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "isConstant": false,
+                                      "isInlineArray": false,
+                                      "isLValue": false,
+                                      "isPure": false,
+                                      "lValueRequested": false,
+                                      "type": "enum BaseAccount.AcctTypeChoices"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "argumentTypes": null,
+                                          "isConstant": false,
+                                          "isLValue": true,
+                                          "isPure": false,
+                                          "lValueRequested": false,
+                                          "member_name": "actType",
+                                          "referencedDeclaration": 23,
+                                          "type": "enum BaseAccount.AcctTypeChoices"
+                                        },
+                                        "children": [
+                                          {
+                                            "attributes": {
+                                              "argumentTypes": null,
+                                              "isConstant": false,
+                                              "isLValue": true,
+                                              "isPure": false,
+                                              "lValueRequested": false,
+                                              "type": "struct BaseAccount.Account storage ref"
+                                            },
+                                            "children": [
+                                              {
+                                                "attributes": {
+                                                  "argumentTypes": null,
+                                                  "overloadedDeclarations": [
+                                                    null
+                                                  ],
+                                                  "referencedDeclaration": 50,
+                                                  "type": "struct BaseAccount.Account storage ref[] storage pointer",
+                                                  "value": "acc"
+                                                },
+                                                "id": 67,
+                                                "name": "Identifier",
+                                                "src": "680:3:0"
+                                              },
+                                              {
+                                                "attributes": {
+                                                  "argumentTypes": null,
+                                                  "overloadedDeclarations": [
+                                                    null
+                                                  ],
+                                                  "referencedDeclaration": 56,
+                                                  "type": "uint256",
+                                                  "value": "i"
+                                                },
+                                                "id": 68,
+                                                "name": "Identifier",
+                                                "src": "684:1:0"
+                                              }
+                                            ],
+                                            "id": 69,
+                                            "name": "IndexAccess",
+                                            "src": "680:6:0"
+                                          }
+                                        ],
+                                        "id": 70,
+                                        "name": "MemberAccess",
+                                        "src": "680:14:0"
+                                      }
+                                    ],
+                                    "id": 71,
+                                    "name": "TupleExpression",
+                                    "src": "679:16:0"
+                                  }
+                                ],
+                                "id": 72,
+                                "name": "BinaryOperation",
+                                "src": "668:27:0"
+                              },
+                              {
+                                "children": [
+                                  {
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "argumentTypes": null,
+                                          "isConstant": false,
+                                          "isLValue": false,
+                                          "isPure": false,
+                                          "lValueRequested": false,
+                                          "operator": "=",
+                                          "type": "uint256"
+                                        },
+                                        "children": [
+                                          {
+                                            "attributes": {
+                                              "argumentTypes": null,
+                                              "isConstant": false,
+                                              "isLValue": true,
+                                              "isPure": false,
+                                              "lValueRequested": true,
+                                              "member_name": "balance",
+                                              "referencedDeclaration": 17,
+                                              "type": "uint256"
+                                            },
+                                            "children": [
+                                              {
+                                                "attributes": {
+                                                  "argumentTypes": null,
+                                                  "isConstant": false,
+                                                  "isLValue": true,
+                                                  "isPure": false,
+                                                  "lValueRequested": false,
+                                                  "type": "struct BaseAccount.Account storage ref"
+                                                },
+                                                "children": [
+                                                  {
+                                                    "attributes": {
+                                                      "argumentTypes": null,
+                                                      "overloadedDeclarations": [
+                                                        null
+                                                      ],
+                                                      "referencedDeclaration": 50,
+                                                      "type": "struct BaseAccount.Account storage ref[] storage pointer",
+                                                      "value": "acc"
+                                                    },
+                                                    "id": 73,
+                                                    "name": "Identifier",
+                                                    "src": "707:3:0"
+                                                  },
+                                                  {
+                                                    "attributes": {
+                                                      "argumentTypes": null,
+                                                      "overloadedDeclarations": [
+                                                        null
+                                                      ],
+                                                      "referencedDeclaration": 56,
+                                                      "type": "uint256",
+                                                      "value": "i"
+                                                    },
+                                                    "id": 74,
+                                                    "name": "Identifier",
+                                                    "src": "711:1:0"
+                                                  }
+                                                ],
+                                                "id": 75,
+                                                "name": "IndexAccess",
+                                                "src": "707:6:0"
+                                              }
+                                            ],
+                                            "id": 76,
+                                            "name": "MemberAccess",
+                                            "src": "707:14:0"
+                                          },
+                                          {
+                                            "attributes": {
+                                              "argumentTypes": null,
+                                              "commonType": {
+                                                "typeIdentifier": "t_uint256",
+                                                "typeString": "uint256"
+                                              },
+                                              "isConstant": false,
+                                              "isLValue": false,
+                                              "isPure": false,
+                                              "lValueRequested": false,
+                                              "operator": "+",
+                                              "type": "uint256"
+                                            },
+                                            "children": [
+                                              {
+                                                "attributes": {
+                                                  "argumentTypes": null,
+                                                  "isConstant": false,
+                                                  "isLValue": true,
+                                                  "isPure": false,
+                                                  "lValueRequested": false,
+                                                  "member_name": "balance",
+                                                  "referencedDeclaration": 17,
+                                                  "type": "uint256"
+                                                },
+                                                "children": [
+                                                  {
+                                                    "attributes": {
+                                                      "argumentTypes": null,
+                                                      "isConstant": false,
+                                                      "isLValue": true,
+                                                      "isPure": false,
+                                                      "lValueRequested": false,
+                                                      "type": "struct BaseAccount.Account storage ref"
+                                                    },
+                                                    "children": [
+                                                      {
+                                                        "attributes": {
+                                                          "argumentTypes": null,
+                                                          "overloadedDeclarations": [
+                                                            null
+                                                          ],
+                                                          "referencedDeclaration": 50,
+                                                          "type": "struct BaseAccount.Account storage ref[] storage pointer",
+                                                          "value": "acc"
+                                                        },
+                                                        "id": 77,
+                                                        "name": "Identifier",
+                                                        "src": "724:3:0"
+                                                      },
+                                                      {
+                                                        "attributes": {
+                                                          "argumentTypes": null,
+                                                          "overloadedDeclarations": [
+                                                            null
+                                                          ],
+                                                          "referencedDeclaration": 56,
+                                                          "type": "uint256",
+                                                          "value": "i"
+                                                        },
+                                                        "id": 78,
+                                                        "name": "Identifier",
+                                                        "src": "728:1:0"
+                                                      }
+                                                    ],
+                                                    "id": 79,
+                                                    "name": "IndexAccess",
+                                                    "src": "724:6:0"
+                                                  }
+                                                ],
+                                                "id": 80,
+                                                "name": "MemberAccess",
+                                                "src": "724:14:0"
+                                              },
+                                              {
+                                                "attributes": {
+                                                  "argumentTypes": null,
+                                                  "overloadedDeclarations": [
+                                                    null
+                                                  ],
+                                                  "referencedDeclaration": 44,
+                                                  "type": "uint256",
+                                                  "value": "amt"
+                                                },
+                                                "id": 81,
+                                                "name": "Identifier",
+                                                "src": "741:3:0"
+                                              }
+                                            ],
+                                            "id": 82,
+                                            "name": "BinaryOperation",
+                                            "src": "724:20:0"
+                                          }
+                                        ],
+                                        "id": 83,
+                                        "name": "Assignment",
+                                        "src": "707:37:0"
+                                      }
+                                    ],
+                                    "id": 84,
+                                    "name": "ExpressionStatement",
+                                    "src": "707:37:0"
+                                  },
+                                  {
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "argumentTypes": null,
+                                          "isConstant": false,
+                                          "isLValue": false,
+                                          "isPure": false,
+                                          "isStructConstructorCall": false,
+                                          "lValueRequested": false,
+                                          "names": [
+                                            null
+                                          ],
+                                          "type": "uint256",
+                                          "type_conversion": false
+                                        },
+                                        "children": [
+                                          {
+                                            "attributes": {
+                                              "argumentTypes": [
+                                                {
+                                                  "typeIdentifier": "t_struct$_Account_$24_storage",
+                                                  "typeString": "struct BaseAccount.Account storage ref"
+                                                }
+                                              ],
+                                              "isConstant": false,
+                                              "isLValue": false,
+                                              "isPure": false,
+                                              "lValueRequested": false,
+                                              "member_name": "push",
+                                              "referencedDeclaration": null,
+                                              "type": "function (struct BaseAccount.Account storage ref) returns (uint256)"
+                                            },
+                                            "children": [
+                                              {
+                                                "attributes": {
+                                                  "argumentTypes": null,
+                                                  "isConstant": false,
+                                                  "isLValue": true,
+                                                  "isPure": false,
+                                                  "lValueRequested": false,
+                                                  "type": "struct BaseAccount.Account storage ref[] storage ref"
+                                                },
+                                                "children": [
+                                                  {
+                                                    "attributes": {
+                                                      "argumentTypes": null,
+                                                      "overloadedDeclarations": [
+                                                        null
+                                                      ],
+                                                      "referencedDeclaration": 29,
+                                                      "type": "mapping(address => struct BaseAccount.Account storage ref[] storage ref)",
+                                                      "value": "accounts"
+                                                    },
+                                                    "id": 85,
+                                                    "name": "Identifier",
+                                                    "src": "760:8:0"
+                                                  },
+                                                  {
+                                                    "attributes": {
+                                                      "argumentTypes": null,
+                                                      "overloadedDeclarations": [
+                                                        null
+                                                      ],
+                                                      "referencedDeclaration": 40,
+                                                      "type": "address",
+                                                      "value": "user"
+                                                    },
+                                                    "id": 86,
+                                                    "name": "Identifier",
+                                                    "src": "769:4:0"
+                                                  }
+                                                ],
+                                                "id": 87,
+                                                "name": "IndexAccess",
+                                                "src": "760:14:0"
+                                              }
+                                            ],
+                                            "id": 88,
+                                            "name": "MemberAccess",
+                                            "src": "760:19:0"
+                                          },
+                                          {
+                                            "attributes": {
+                                              "argumentTypes": null,
+                                              "isConstant": false,
+                                              "isLValue": true,
+                                              "isPure": false,
+                                              "lValueRequested": false,
+                                              "type": "struct BaseAccount.Account storage ref"
+                                            },
+                                            "children": [
+                                              {
+                                                "attributes": {
+                                                  "argumentTypes": null,
+                                                  "overloadedDeclarations": [
+                                                    null
+                                                  ],
+                                                  "referencedDeclaration": 50,
+                                                  "type": "struct BaseAccount.Account storage ref[] storage pointer",
+                                                  "value": "acc"
+                                                },
+                                                "id": 89,
+                                                "name": "Identifier",
+                                                "src": "780:3:0"
+                                              },
+                                              {
+                                                "attributes": {
+                                                  "argumentTypes": null,
+                                                  "overloadedDeclarations": [
+                                                    null
+                                                  ],
+                                                  "referencedDeclaration": 56,
+                                                  "type": "uint256",
+                                                  "value": "i"
+                                                },
+                                                "id": 90,
+                                                "name": "Identifier",
+                                                "src": "784:1:0"
+                                              }
+                                            ],
+                                            "id": 91,
+                                            "name": "IndexAccess",
+                                            "src": "780:6:0"
+                                          }
+                                        ],
+                                        "id": 92,
+                                        "name": "FunctionCall",
+                                        "src": "760:27:0"
+                                      }
+                                    ],
+                                    "id": 93,
+                                    "name": "ExpressionStatement",
+                                    "src": "760:27:0"
+                                  }
+                                ],
+                                "id": 94,
+                                "name": "Block",
+                                "src": "697:99:0"
+                              }
+                            ],
+                            "id": 95,
+                            "name": "IfStatement",
+                            "src": "663:133:0"
+                          }
+                        ],
+                        "id": 96,
+                        "name": "Block",
+                        "src": "654:146:0"
+                      }
+                    ],
+                    "id": 97,
+                    "name": "ForStatement",
+                    "src": "616:184:0"
+                  }
+                ],
+                "id": 98,
+                "name": "Block",
+                "src": "565:239:0"
+              }
+            ],
+            "id": 99,
+            "name": "FunctionDefinition",
+            "src": "490:314:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "implemented": true,
+              "isConstructor": false,
+              "modifiers": [
+                null
+              ],
+              "name": "getAccountInfo",
+              "payable": false,
+              "scope": 191,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "user",
+                      "scope": 142,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "type": "address"
+                        },
+                        "id": 100,
+                        "name": "ElementaryTypeName",
+                        "src": "834:7:0"
+                      }
+                    ],
+                    "id": 101,
+                    "name": "VariableDeclaration",
+                    "src": "834:12:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "actType",
+                      "scope": 142,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "enum BaseAccount.AcctTypeChoices",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "contractScope": null,
+                          "name": "AcctTypeChoices",
+                          "referencedDeclaration": 11,
+                          "type": "enum BaseAccount.AcctTypeChoices"
+                        },
+                        "id": 102,
+                        "name": "UserDefinedTypeName",
+                        "src": "848:15:0"
+                      }
+                    ],
+                    "id": 103,
+                    "name": "VariableDeclaration",
+                    "src": "848:23:0"
+                  }
+                ],
+                "id": 104,
+                "name": "ParameterList",
+                "src": "832:40:0"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "",
+                      "scope": 142,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "struct BaseAccount.Account memory",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "contractScope": null,
+                          "name": "Account",
+                          "referencedDeclaration": 24,
+                          "type": "struct BaseAccount.Account storage pointer"
+                        },
+                        "id": 105,
+                        "name": "UserDefinedTypeName",
+                        "src": "882:7:0"
+                      }
+                    ],
+                    "id": 106,
+                    "name": "VariableDeclaration",
+                    "src": "882:7:0"
+                  }
+                ],
+                "id": 107,
+                "name": "ParameterList",
+                "src": "881:9:0"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "assignments": [
+                        111
+                      ]
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "constant": false,
+                          "name": "acc",
+                          "scope": 142,
+                          "stateVariable": false,
+                          "storageLocation": "storage",
+                          "type": "struct BaseAccount.Account storage ref[] storage pointer",
+                          "value": null,
+                          "visibility": "internal"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "length": null,
+                              "type": "struct BaseAccount.Account storage ref[] storage pointer"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "contractScope": null,
+                                  "name": "Account",
+                                  "referencedDeclaration": 24,
+                                  "type": "struct BaseAccount.Account storage pointer"
+                                },
+                                "id": 109,
+                                "name": "UserDefinedTypeName",
+                                "src": "900:7:0"
+                              }
+                            ],
+                            "id": 110,
+                            "name": "ArrayTypeName",
+                            "src": "900:9:0"
+                          }
+                        ],
+                        "id": 111,
+                        "name": "VariableDeclaration",
+                        "src": "900:22:0"
+                      },
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "type": "struct BaseAccount.Account storage ref[] storage ref"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 29,
+                              "type": "mapping(address => struct BaseAccount.Account storage ref[] storage ref)",
+                              "value": "accounts"
+                            },
+                            "id": 112,
+                            "name": "Identifier",
+                            "src": "925:8:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 101,
+                              "type": "address",
+                              "value": "user"
+                            },
+                            "id": 113,
+                            "name": "Identifier",
+                            "src": "934:4:0"
+                          }
+                        ],
+                        "id": 114,
+                        "name": "IndexAccess",
+                        "src": "925:14:0"
+                      }
+                    ],
+                    "id": 115,
+                    "name": "VariableDeclarationStatement",
+                    "src": "900:39:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "assignments": [
+                            117
+                          ]
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "constant": false,
+                              "name": "i",
+                              "scope": 142,
+                              "stateVariable": false,
+                              "storageLocation": "default",
+                              "type": "uint256",
+                              "value": null,
+                              "visibility": "internal"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "name": "uint",
+                                  "type": "uint256"
+                                },
+                                "id": 116,
+                                "name": "ElementaryTypeName",
+                                "src": "952:4:0"
+                              }
+                            ],
+                            "id": 117,
+                            "name": "VariableDeclaration",
+                            "src": "952:6:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "hexvalue": "30",
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "subdenomination": null,
+                              "token": "number",
+                              "type": "int_const 0",
+                              "value": "0"
+                            },
+                            "id": 118,
+                            "name": "Literal",
+                            "src": "961:1:0"
+                          }
+                        ],
+                        "id": 119,
+                        "name": "VariableDeclarationStatement",
+                        "src": "952:10:0"
+                      },
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "commonType": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          },
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "<",
+                          "type": "bool"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 117,
+                              "type": "uint256",
+                              "value": "i"
+                            },
+                            "id": 120,
+                            "name": "Identifier",
+                            "src": "964:1:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "length",
+                              "referencedDeclaration": null,
+                              "type": "uint256"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 111,
+                                  "type": "struct BaseAccount.Account storage ref[] storage pointer",
+                                  "value": "acc"
+                                },
+                                "id": 121,
+                                "name": "Identifier",
+                                "src": "968:3:0"
+                              }
+                            ],
+                            "id": 122,
+                            "name": "MemberAccess",
+                            "src": "968:10:0"
+                          }
+                        ],
+                        "id": 123,
+                        "name": "BinaryOperation",
+                        "src": "964:14:0"
+                      },
+                      {
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "operator": "++",
+                              "prefix": false,
+                              "type": "uint256"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 117,
+                                  "type": "uint256",
+                                  "value": "i"
+                                },
+                                "id": 124,
+                                "name": "Identifier",
+                                "src": "980:1:0"
+                              }
+                            ],
+                            "id": 125,
+                            "name": "UnaryOperation",
+                            "src": "980:3:0"
+                          }
+                        ],
+                        "id": 126,
+                        "name": "ExpressionStatement",
+                        "src": "980:3:0"
+                      },
+                      {
+                        "children": [
+                          {
+                            "attributes": {
+                              "falseBody": null
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "commonType": {
+                                    "typeIdentifier": "t_enum$_AcctTypeChoices_$11",
+                                    "typeString": "enum BaseAccount.AcctTypeChoices"
+                                  },
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "operator": "==",
+                                  "type": "bool"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 103,
+                                      "type": "enum BaseAccount.AcctTypeChoices",
+                                      "value": "actType"
+                                    },
+                                    "id": 127,
+                                    "name": "Identifier",
+                                    "src": "999:7:0"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "isConstant": false,
+                                      "isLValue": true,
+                                      "isPure": false,
+                                      "lValueRequested": false,
+                                      "member_name": "actType",
+                                      "referencedDeclaration": 23,
+                                      "type": "enum BaseAccount.AcctTypeChoices"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "argumentTypes": null,
+                                          "isConstant": false,
+                                          "isLValue": true,
+                                          "isPure": false,
+                                          "lValueRequested": false,
+                                          "type": "struct BaseAccount.Account storage ref"
+                                        },
+                                        "children": [
+                                          {
+                                            "attributes": {
+                                              "argumentTypes": null,
+                                              "overloadedDeclarations": [
+                                                null
+                                              ],
+                                              "referencedDeclaration": 111,
+                                              "type": "struct BaseAccount.Account storage ref[] storage pointer",
+                                              "value": "acc"
+                                            },
+                                            "id": 128,
+                                            "name": "Identifier",
+                                            "src": "1010:3:0"
+                                          },
+                                          {
+                                            "attributes": {
+                                              "argumentTypes": null,
+                                              "overloadedDeclarations": [
+                                                null
+                                              ],
+                                              "referencedDeclaration": 117,
+                                              "type": "uint256",
+                                              "value": "i"
+                                            },
+                                            "id": 129,
+                                            "name": "Identifier",
+                                            "src": "1014:1:0"
+                                          }
+                                        ],
+                                        "id": 130,
+                                        "name": "IndexAccess",
+                                        "src": "1010:6:0"
+                                      }
+                                    ],
+                                    "id": 131,
+                                    "name": "MemberAccess",
+                                    "src": "1010:14:0"
+                                  }
+                                ],
+                                "id": 132,
+                                "name": "BinaryOperation",
+                                "src": "999:25:0"
+                              },
+                              {
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "functionReturnParameters": 107
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "argumentTypes": null,
+                                          "isConstant": false,
+                                          "isLValue": true,
+                                          "isPure": false,
+                                          "lValueRequested": false,
+                                          "type": "struct BaseAccount.Account storage ref"
+                                        },
+                                        "children": [
+                                          {
+                                            "attributes": {
+                                              "argumentTypes": null,
+                                              "overloadedDeclarations": [
+                                                null
+                                              ],
+                                              "referencedDeclaration": 111,
+                                              "type": "struct BaseAccount.Account storage ref[] storage pointer",
+                                              "value": "acc"
+                                            },
+                                            "id": 133,
+                                            "name": "Identifier",
+                                            "src": "1048:3:0"
+                                          },
+                                          {
+                                            "attributes": {
+                                              "argumentTypes": null,
+                                              "overloadedDeclarations": [
+                                                null
+                                              ],
+                                              "referencedDeclaration": 117,
+                                              "type": "uint256",
+                                              "value": "i"
+                                            },
+                                            "id": 134,
+                                            "name": "Identifier",
+                                            "src": "1052:1:0"
+                                          }
+                                        ],
+                                        "id": 135,
+                                        "name": "IndexAccess",
+                                        "src": "1048:6:0"
+                                      }
+                                    ],
+                                    "id": 136,
+                                    "name": "Return",
+                                    "src": "1041:13:0"
+                                  }
+                                ],
+                                "id": 137,
+                                "name": "Block",
+                                "src": "1027:38:0"
+                              }
+                            ],
+                            "id": 138,
+                            "name": "IfStatement",
+                            "src": "994:71:0"
+                          }
+                        ],
+                        "id": 139,
+                        "name": "Block",
+                        "src": "985:86:0"
+                      }
+                    ],
+                    "id": 140,
+                    "name": "ForStatement",
+                    "src": "947:124:0"
+                  }
+                ],
+                "id": 141,
+                "name": "Block",
+                "src": "891:189:0"
+              }
+            ],
+            "id": 142,
+            "name": "FunctionDefinition",
+            "src": "809:271:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "implemented": true,
+              "isConstructor": false,
+              "modifiers": [
+                null
+              ],
+              "name": "createSavingsAccount",
+              "payable": false,
+              "scope": 191,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "p",
+                      "scope": 166,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "type": "address"
+                        },
+                        "id": 143,
+                        "name": "ElementaryTypeName",
+                        "src": "1114:7:0"
+                      }
+                    ],
+                    "id": 144,
+                    "name": "VariableDeclaration",
+                    "src": "1114:9:0"
+                  }
+                ],
+                "id": 145,
+                "name": "ParameterList",
+                "src": "1113:11:0"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 146,
+                "name": "ParameterList",
+                "src": "1132:0:0"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "+=",
+                          "type": "uint256"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 4,
+                              "type": "uint256",
+                              "value": "number"
+                            },
+                            "id": 147,
+                            "name": "Identifier",
+                            "src": "1138:6:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "hexvalue": "31",
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "subdenomination": null,
+                              "token": "number",
+                              "type": "int_const 1",
+                              "value": "1"
+                            },
+                            "id": 148,
+                            "name": "Literal",
+                            "src": "1146:1:0"
+                          }
+                        ],
+                        "id": 149,
+                        "name": "Assignment",
+                        "src": "1138:9:0"
+                      }
+                    ],
+                    "id": 150,
+                    "name": "ExpressionStatement",
+                    "src": "1138:9:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "uint256",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_struct$_Account_$24_memory",
+                                  "typeString": "struct BaseAccount.Account memory"
+                                }
+                              ],
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "push",
+                              "referencedDeclaration": null,
+                              "type": "function (struct BaseAccount.Account storage ref) returns (uint256)"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": true,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "type": "struct BaseAccount.Account storage ref[] storage ref"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 29,
+                                      "type": "mapping(address => struct BaseAccount.Account storage ref[] storage ref)",
+                                      "value": "accounts"
+                                    },
+                                    "id": 151,
+                                    "name": "Identifier",
+                                    "src": "1153:8:0"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 144,
+                                      "type": "address",
+                                      "value": "p"
+                                    },
+                                    "id": 152,
+                                    "name": "Identifier",
+                                    "src": "1162:1:0"
+                                  }
+                                ],
+                                "id": 153,
+                                "name": "IndexAccess",
+                                "src": "1153:11:0"
+                              }
+                            ],
+                            "id": 154,
+                            "name": "MemberAccess",
+                            "src": "1153:16:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "isStructConstructorCall": true,
+                              "lValueRequested": false,
+                              "names": [
+                                null
+                              ],
+                              "type": "struct BaseAccount.Account memory",
+                              "type_conversion": false
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_rational_1000_by_1",
+                                      "typeString": "int_const 1000"
+                                    },
+                                    {
+                                      "typeIdentifier": "t_uint256",
+                                      "typeString": "uint256"
+                                    },
+                                    {
+                                      "typeIdentifier": "t_enum$_AuditStatusChoices_$15",
+                                      "typeString": "enum BaseAccount.AuditStatusChoices"
+                                    },
+                                    {
+                                      "typeIdentifier": "t_enum$_AcctTypeChoices_$11",
+                                      "typeString": "enum BaseAccount.AcctTypeChoices"
+                                    }
+                                  ],
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 24,
+                                  "type": "type(struct BaseAccount.Account storage pointer)",
+                                  "value": "Account"
+                                },
+                                "id": 155,
+                                "name": "Identifier",
+                                "src": "1170:7:0"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "hexvalue": "31303030",
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "subdenomination": null,
+                                  "token": "number",
+                                  "type": "int_const 1000",
+                                  "value": "1000"
+                                },
+                                "id": 156,
+                                "name": "Literal",
+                                "src": "1178:4:0"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 4,
+                                  "type": "uint256",
+                                  "value": "number"
+                                },
+                                "id": 157,
+                                "name": "Identifier",
+                                "src": "1184:6:0"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "member_name": "goodrecords",
+                                  "referencedDeclaration": null,
+                                  "type": "enum BaseAccount.AuditStatusChoices"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 15,
+                                      "type": "type(enum BaseAccount.AuditStatusChoices)",
+                                      "value": "AuditStatusChoices"
+                                    },
+                                    "id": 158,
+                                    "name": "Identifier",
+                                    "src": "1192:18:0"
+                                  }
+                                ],
+                                "id": 159,
+                                "name": "MemberAccess",
+                                "src": "1192:30:0"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "member_name": "saving",
+                                  "referencedDeclaration": null,
+                                  "type": "enum BaseAccount.AcctTypeChoices"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 11,
+                                      "type": "type(enum BaseAccount.AcctTypeChoices)",
+                                      "value": "AcctTypeChoices"
+                                    },
+                                    "id": 160,
+                                    "name": "Identifier",
+                                    "src": "1224:15:0"
+                                  }
+                                ],
+                                "id": 161,
+                                "name": "MemberAccess",
+                                "src": "1224:22:0"
+                              }
+                            ],
+                            "id": 162,
+                            "name": "FunctionCall",
+                            "src": "1170:77:0"
+                          }
+                        ],
+                        "id": 163,
+                        "name": "FunctionCall",
+                        "src": "1153:95:0"
+                      }
+                    ],
+                    "id": 164,
+                    "name": "ExpressionStatement",
+                    "src": "1153:95:0"
+                  }
+                ],
+                "id": 165,
+                "name": "Block",
+                "src": "1132:121:0"
+              }
+            ],
+            "id": 166,
+            "name": "FunctionDefinition",
+            "src": "1084:169:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "implemented": true,
+              "isConstructor": false,
+              "modifiers": [
+                null
+              ],
+              "name": "createCurrentAccount",
+              "payable": false,
+              "scope": 191,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "p",
+                      "scope": 190,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "type": "address"
+                        },
+                        "id": 167,
+                        "name": "ElementaryTypeName",
+                        "src": "1287:7:0"
+                      }
+                    ],
+                    "id": 168,
+                    "name": "VariableDeclaration",
+                    "src": "1287:9:0"
+                  }
+                ],
+                "id": 169,
+                "name": "ParameterList",
+                "src": "1286:11:0"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 170,
+                "name": "ParameterList",
+                "src": "1305:0:0"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "+=",
+                          "type": "uint256"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 4,
+                              "type": "uint256",
+                              "value": "number"
+                            },
+                            "id": 171,
+                            "name": "Identifier",
+                            "src": "1311:6:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "hexvalue": "31",
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "subdenomination": null,
+                              "token": "number",
+                              "type": "int_const 1",
+                              "value": "1"
+                            },
+                            "id": 172,
+                            "name": "Literal",
+                            "src": "1319:1:0"
+                          }
+                        ],
+                        "id": 173,
+                        "name": "Assignment",
+                        "src": "1311:9:0"
+                      }
+                    ],
+                    "id": 174,
+                    "name": "ExpressionStatement",
+                    "src": "1311:9:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "uint256",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_struct$_Account_$24_memory",
+                                  "typeString": "struct BaseAccount.Account memory"
+                                }
+                              ],
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "push",
+                              "referencedDeclaration": null,
+                              "type": "function (struct BaseAccount.Account storage ref) returns (uint256)"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": true,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "type": "struct BaseAccount.Account storage ref[] storage ref"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 29,
+                                      "type": "mapping(address => struct BaseAccount.Account storage ref[] storage ref)",
+                                      "value": "accounts"
+                                    },
+                                    "id": 175,
+                                    "name": "Identifier",
+                                    "src": "1326:8:0"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 168,
+                                      "type": "address",
+                                      "value": "p"
+                                    },
+                                    "id": 176,
+                                    "name": "Identifier",
+                                    "src": "1335:1:0"
+                                  }
+                                ],
+                                "id": 177,
+                                "name": "IndexAccess",
+                                "src": "1326:11:0"
+                              }
+                            ],
+                            "id": 178,
+                            "name": "MemberAccess",
+                            "src": "1326:16:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "isStructConstructorCall": true,
+                              "lValueRequested": false,
+                              "names": [
+                                null
+                              ],
+                              "type": "struct BaseAccount.Account memory",
+                              "type_conversion": false
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_rational_0_by_1",
+                                      "typeString": "int_const 0"
+                                    },
+                                    {
+                                      "typeIdentifier": "t_uint256",
+                                      "typeString": "uint256"
+                                    },
+                                    {
+                                      "typeIdentifier": "t_enum$_AuditStatusChoices_$15",
+                                      "typeString": "enum BaseAccount.AuditStatusChoices"
+                                    },
+                                    {
+                                      "typeIdentifier": "t_enum$_AcctTypeChoices_$11",
+                                      "typeString": "enum BaseAccount.AcctTypeChoices"
+                                    }
+                                  ],
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 24,
+                                  "type": "type(struct BaseAccount.Account storage pointer)",
+                                  "value": "Account"
+                                },
+                                "id": 179,
+                                "name": "Identifier",
+                                "src": "1343:7:0"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "hexvalue": "30",
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "subdenomination": null,
+                                  "token": "number",
+                                  "type": "int_const 0",
+                                  "value": "0"
+                                },
+                                "id": 180,
+                                "name": "Literal",
+                                "src": "1351:1:0"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 4,
+                                  "type": "uint256",
+                                  "value": "number"
+                                },
+                                "id": 181,
+                                "name": "Identifier",
+                                "src": "1354:6:0"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "member_name": "goodrecords",
+                                  "referencedDeclaration": null,
+                                  "type": "enum BaseAccount.AuditStatusChoices"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 15,
+                                      "type": "type(enum BaseAccount.AuditStatusChoices)",
+                                      "value": "AuditStatusChoices"
+                                    },
+                                    "id": 182,
+                                    "name": "Identifier",
+                                    "src": "1362:18:0"
+                                  }
+                                ],
+                                "id": 183,
+                                "name": "MemberAccess",
+                                "src": "1362:30:0"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "member_name": "current",
+                                  "referencedDeclaration": null,
+                                  "type": "enum BaseAccount.AcctTypeChoices"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 11,
+                                      "type": "type(enum BaseAccount.AcctTypeChoices)",
+                                      "value": "AcctTypeChoices"
+                                    },
+                                    "id": 184,
+                                    "name": "Identifier",
+                                    "src": "1394:15:0"
+                                  }
+                                ],
+                                "id": 185,
+                                "name": "MemberAccess",
+                                "src": "1394:23:0"
+                              }
+                            ],
+                            "id": 186,
+                            "name": "FunctionCall",
+                            "src": "1343:75:0"
+                          }
+                        ],
+                        "id": 187,
+                        "name": "FunctionCall",
+                        "src": "1326:93:0"
+                      }
+                    ],
+                    "id": 188,
+                    "name": "ExpressionStatement",
+                    "src": "1326:93:0"
+                  }
+                ],
+                "id": 189,
+                "name": "Block",
+                "src": "1305:119:0"
+              }
+            ],
+            "id": 190,
+            "name": "FunctionDefinition",
+            "src": "1257:167:0"
+          }
+        ],
+        "id": 191,
+        "name": "ContractDefinition",
+        "src": "25:1402:0"
+      }
+    ],
+    "id": 192,
+    "name": "SourceUnit",
+    "src": "0:1428:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.18+commit.9cf6e910.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "1.0.1",
+  "updatedAt": "2018-03-05T23:07:57.101Z"
+}

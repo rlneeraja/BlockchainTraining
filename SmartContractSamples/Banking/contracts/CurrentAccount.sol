@@ -1,21 +1,19 @@
 pragma solidity ^0.4.4;
 import "./BaseAccount.sol";
 
-contract CurrentAccount {
+contract CurrentAccount is BaseAccount {
 
-  
-  
-  function CurrentAccount() {
-    // constructor
-    balance = 1000;
-  }
 
-  function withdraw(uint amtt) public {
-    balance = balance-amt;
+function withdraw(address user, AcctTypeChoices actType, uint amt) internal {
+    Account[]  storage acc = accounts[user];
+    for (uint i = 0; i < acc.length; i++) {
+       if ( actType == (acc[i].actType)) {
+         if( acc[i].balance > 0 ) {
+            acc[i].balance = acc[i].balance - amt;      
+            accounts[user].push(acc[i]);
+         }
+      }
   }
-  function deposit(uint amt) public {
-    balance = balance+amt;
   }
-
 
 }
